@@ -23,6 +23,7 @@ import java.util.Iterator;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.R.drawable;
 import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -204,6 +205,25 @@ public class GokitControlActivity extends BaseActivity implements OnClickListene
 			case UPDATE_UI:
 				spColor.setSelection(Integer.parseInt((String) deviceStatu.get(KEY_LIGHT_COLOR)));
 				//
+				Log.e("statu",deviceStatu.toString());
+				mHumuTv.setText((CharSequence)deviceStatu.get("LIGHT")+"%");
+				Integer tempure = Integer.parseInt(deviceStatu.get("Humidity").toString());
+				tempure -=20;
+				mTempTv.setText(tempure.toString()+"℃");
+				Integer speed = Integer.parseInt(deviceStatu.get(KEY_SPEED).toString());
+				if(speed == 0){
+					mChushiIv.setImageResource(R.drawable.shidown);
+					mSongfenIv.setImageResource(R.drawable.fengdown);
+				}
+				if(speed < 0){
+					mChushiIv.setImageResource(R.drawable.shidown);
+					mSongfenIv.setImageResource(R.drawable.fengup);
+				}
+				if(speed > 0){
+					mChushiIv.setImageResource(R.drawable.shiup);
+					mSongfenIv.setImageResource(R.drawable.fengdown);
+				}
+				
 				swRed.setChecked((Boolean) deviceStatu.get(KEY_RED_SWITCH));
 				swInfrared.setChecked((Boolean) deviceStatu.get(KEY_INFRARED));
 				tvBlue.setText((CharSequence) deviceStatu.get(KEY_LIGHT_BLUE));
@@ -281,13 +301,23 @@ public class GokitControlActivity extends BaseActivity implements OnClickListene
 
 		}
 	};
-
+	
+	//my view
+	private TextView mTempTv;
+	private TextView mHumuTv;
+	private ImageView mSongfenIv;
+	private ImageView mChushiIv;
+	
+	private Boolean mIsWinding = false;
+	private Boolean mIsChushing = false;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_gokit_control);
 		initViews();
 		initEvents();
+		
 		deviceStatu = new HashMap<String, Object>();
 		controlDevice = (ControlDevice) getIntent().getSerializableExtra("device");
 		xpgWifiDevice = BaseActivity.findDeviceByMac(controlDevice.getMac(), controlDevice.getDid());
@@ -403,6 +433,15 @@ public class GokitControlActivity extends BaseActivity implements OnClickListene
 	 * 初始化控件.
 	 */
 	private void initViews() {
+		
+		//init my view
+		mTempTv = (TextView) findViewById(R.id.tv_temp);
+		mHumuTv = (TextView) findViewById(R.id.tv_humu);
+		mSongfenIv = (ImageView) findViewById(R.id.iv_songfeng);
+		mChushiIv = (ImageView) findViewById(R.id.iv_shoushi);
+		
+		
+		
 		swRed = (Switch) findViewById(R.id.sw_red);
 		swInfrared = (Switch) findViewById(R.id.sw_infrared);
 		spColor = (Spinner) findViewById(R.id.sp_color);
@@ -433,6 +472,12 @@ public class GokitControlActivity extends BaseActivity implements OnClickListene
 	 * 初始化监听器.
 	 */
 	private void initEvents() {
+		//init my view events
+		mSongfenIv.setOnClickListener(this);
+		mChushiIv.setOnClickListener(this);
+		
+		
+		
 		redadd.setOnClickListener(this);
 		redsub.setOnClickListener(this);
 		greenadd.setOnClickListener(this);
@@ -737,6 +782,53 @@ public class GokitControlActivity extends BaseActivity implements OnClickListene
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
+		
+		case R.id.iv_shoushi:
+			mIsChushing = !mIsChushing;
+			if(mIsChushing){
+				mSongfenIv.setImageResource(R.drawable.fengdown);
+				mChushiIv.setImageResource(R.drawable.shiup);
+				try {
+					sendJson(KEY_SPEED, 1);
+				} catch (JSONException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}else{
+				mChushiIv.setImageResource(R.drawable.shidown);
+				try {
+					sendJson(KEY_SPEED, 0);
+				} catch (JSONException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+			break;
+		case R.id.iv_songfeng:
+			mIsWinding = !mIsWinding;
+			if(mIsWinding){
+				mChushiIv.setImageResource(R.drawable.shidown);
+				mSongfenIv.setImageResource(R.drawable.fengup);
+				try {
+					sendJson(KEY_SPEED, -1);
+				} catch (JSONException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}else{
+				mSongfenIv.setImageResource(R.drawable.fengdown);
+				try {
+					sendJson(KEY_SPEED, 0);
+				} catch (JSONException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+			
+			
+			break;
+		
+		
 		case R.id.redadd:
 			int redNum1 = sbRed.getProgress();
 			if (redNum1 < 254) {
