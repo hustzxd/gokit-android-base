@@ -68,4 +68,15 @@
         android:text="40%"
         android:textColor="#62cdfb" />
 
+    <com.xpg.gokit.bubble.BubbleTextVew
+        android:id="@+id/tv_bubble"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/imageView1"
+        android:padding="10dp"
+        android:text="Hello BubbleTextVew"
+        android:textColor="@android:color/white"
+        android:textSize="10sp" />
+
 </RelativeLayout>
