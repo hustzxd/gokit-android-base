@@ -206,9 +206,9 @@ public class GokitControlActivity extends BaseActivity implements OnClickListene
 				spColor.setSelection(Integer.parseInt((String) deviceStatu.get(KEY_LIGHT_COLOR)));
 				//
 				Log.e("statu",deviceStatu.toString());
-				mHumuTv.setText((CharSequence)deviceStatu.get("LIGHT")+"%");
-				Integer tempure = Integer.parseInt(deviceStatu.get("Humidity").toString());
-				tempure -=20;
+				mHumuTv.setText((CharSequence)deviceStatu.get("Humidity")+"%");
+				Integer tempure = Integer.parseInt(deviceStatu.get("Temperature").toString());
+//				tempure -=20;
 				mTempTv.setText(tempure.toString()+"℃");
 				Integer speed = Integer.parseInt(deviceStatu.get(KEY_SPEED).toString());
 				if(speed == 0){
