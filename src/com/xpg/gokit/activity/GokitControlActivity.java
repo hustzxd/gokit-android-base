@@ -224,37 +224,37 @@ public class GokitControlActivity extends BaseActivity implements OnClickListene
 					mSongfenIv.setImageResource(R.drawable.fengdown);
 				}
 				
-				swRed.setChecked((Boolean) deviceStatu.get(KEY_RED_SWITCH));
-				swInfrared.setChecked((Boolean) deviceStatu.get(KEY_INFRARED));
-				tvBlue.setText((CharSequence) deviceStatu.get(KEY_LIGHT_BLUE));
-				tvGreen.setText((CharSequence) deviceStatu.get(KEY_LIGHT_GREEN));
-				tvRed.setText((CharSequence) deviceStatu.get(KEY_LIGHT_RED));
-				tvSpeed.setText((CharSequence) deviceStatu.get(KEY_SPEED));
-				tvTemplate.setText((CharSequence) deviceStatu.get(KEY_TEMPLATE));
-				tvHumidity.setText((CharSequence) deviceStatu.get(KEY_HUMIDITY));
-				if ((String) deviceStatu.get(KEY_LIGHT_BLUE) != null) {
-					sbBlue.setProgress(Integer.parseInt((String) deviceStatu.get(KEY_LIGHT_BLUE)));
-				} else {
-					sbBlue.setProgress(0);
-				}
-
-				if ((String) deviceStatu.get(KEY_LIGHT_GREEN) != null) {
-					sbGreen.setProgress(Integer.parseInt((String) deviceStatu.get(KEY_LIGHT_GREEN)));
-				} else {
-					sbBlue.setProgress(0);
-				}
-
-				if ((String) deviceStatu.get(KEY_LIGHT_RED) != null) {
-					sbRed.setProgress(Integer.parseInt((String) deviceStatu.get(KEY_LIGHT_RED)));
-				} else {
-					sbBlue.setProgress(0);
-				}
-
-				if ((String) deviceStatu.get(KEY_SPEED) != null) {
-					sbSpeed.setProgress(5 + Integer.parseInt((String) deviceStatu.get(KEY_SPEED)));
-				} else {
-					sbSpeed.setProgress(5);
-				}
+//				swRed.setChecked((Boolean) deviceStatu.get(KEY_RED_SWITCH));
+//				swInfrared.setChecked((Boolean) deviceStatu.get(KEY_INFRARED));
+//				tvBlue.setText((CharSequence) deviceStatu.get(KEY_LIGHT_BLUE));
+//				tvGreen.setText((CharSequence) deviceStatu.get(KEY_LIGHT_GREEN));
+//				tvRed.setText((CharSequence) deviceStatu.get(KEY_LIGHT_RED));
+//				tvSpeed.setText((CharSequence) deviceStatu.get(KEY_SPEED));
+//				tvTemplate.setText((CharSequence) deviceStatu.get(KEY_TEMPLATE));
+//				tvHumidity.setText((CharSequence) deviceStatu.get(KEY_HUMIDITY));
+//				if ((String) deviceStatu.get(KEY_LIGHT_BLUE) != null) {
+//					sbBlue.setProgress(Integer.parseInt((String) deviceStatu.get(KEY_LIGHT_BLUE)));
+//				} else {
+//					sbBlue.setProgress(0);
+//				}
+//
+//				if ((String) deviceStatu.get(KEY_LIGHT_GREEN) != null) {
+//					sbGreen.setProgress(Integer.parseInt((String) deviceStatu.get(KEY_LIGHT_GREEN)));
+//				} else {
+//					sbBlue.setProgress(0);
+//				}
+//
+//				if ((String) deviceStatu.get(KEY_LIGHT_RED) != null) {
+//					sbRed.setProgress(Integer.parseInt((String) deviceStatu.get(KEY_LIGHT_RED)));
+//				} else {
+//					sbBlue.setProgress(0);
+//				}
+//
+//				if ((String) deviceStatu.get(KEY_SPEED) != null) {
+//					sbSpeed.setProgress(5 + Integer.parseInt((String) deviceStatu.get(KEY_SPEED)));
+//				} else {
+//					sbSpeed.setProgress(5);
+//				}
 				break;
 			case SETNULL:
 				if (xpgWifiDevice != null) {
